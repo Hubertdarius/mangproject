@@ -1,0 +1,304 @@
+#include "stdio.h"
+#include<bits/stdc++.h>
+#include "limits.h"
+#include "conio.h"
+#define PI 3.14159265359
+using namespace std;
+int a[100];
+int n;
+float d2r (int d){
+    //convert degree to radian
+    return d*PI/180.0;
+}
+void nhapmang(int x[100], int &n){
+	do{
+	printf("Nhap so luong phan tu(0<n<=100): ");
+	scanf("%d",&n);
+}while(n<=0 || n>100);
+	for(int i=0;i<n;i++){
+		printf("\na[%d]=",i);
+		scanf("%d",&x[i]);
+	}
+	}
+void xuatmang(int x[100], int n){
+	for(int i=0;i<n;i++){
+		printf("%d ", x[i]);
+	}
+}
+int timmax(int x[100], int n){
+	int max=x[0];
+	for(int i=1;i<n;i++){
+		if(max<x[i]){
+			max=x[i];
+		}
+	}
+	return max;
+}
+int timmin(int x[100],int n){
+	int min=x[0];
+	for(int i=0;i<n;i++){
+		if(min>x[i]){
+			min = x[i];
+		}
+	}
+	return min;
+}
+int swap(int &a, int &b){
+	int temp = a;
+	a=b;
+	b=temp;
+}
+void sapxepTang(int x[],int n){
+	for(int i=0;i<n-1;i++){
+		int vitrinhonhat=i;
+		for(int j=i+1;j<n;j++){
+		if(x[j]<x[vitrinhonhat])
+		vitrinhonhat=j;
+	}
+	swap(x[i],x[vitrinhonhat]);
+	}
+}
+void sapxepGiam(int x[], int n){
+	for(int i=0;i<n-1;i++){
+		int vitrilonnhat=i;
+		for(int j=i+1;j<n;j++){
+			if(x[j]>x[vitrilonnhat]){
+				vitrilonnhat=j;
+			}
+		}
+		swap(x[i],x[vitrilonnhat]);
+	}
+}
+void DaoNguocMang(int x[], int n){
+	for(int i=0;i<=n/2;i++){
+		int tam=x[i];
+		x[i]=x[n-i-1];
+		x[n-i-1]=tam;
+	}
+}
+int timkiem(int x[], int n, int tk){
+	int kq=0;
+	for(int i=0;i<n;i++){
+		if(x[i]==tk){
+			kq=1;
+			return 1;
+		}
+	}
+	return kq;
+}
+void ThucHienTimKiem(int x[], int n){
+	int tk;
+	printf("\nNhap phan tu can tim: ");
+	scanf("%d", &tk);
+	int kq=timkiem(x,n,tk);
+	if(kq==1){
+		printf("\nTim thay phan tu nay trong mang!");
+	}
+	else{
+		printf("\nKhong tim thay phan tu nay trong mang!");
+	}
+}
+int PhanTuNhoThuHai(int x[], int n){
+	int min=INT_MAX;
+	int min_2=INT_MAX;
+	for(int i=0;i<n;i++){
+		if(x[i]<min){
+			min=x[i];
+		}
+	}
+	for(int i=0;i<n;i++){
+		if(x[i]==min)
+		continue;
+		else{
+		    if(x[i]<min_2){
+		    	min_2=x[i];
+			}
+		}
+	}
+	return min_2;
+}
+void xoaMangTaiViTri(int x[100], int &n, int vi_tri){
+	// 1 2 3 4 5
+	// 1 2 4 5
+	for(int i=vi_tri; i<n-1; i++){
+		x[i] = x[i+1];
+	}
+	n--; 
+}
+
+void xoaMangTheoGiaTri(int x[100], int &n){
+	int gt;
+	printf("\nNhap vao gia tri can xoa: ");
+	scanf("%d", &gt);
+	for(int i=0; i<n; i++){
+		if(x[i]==gt)
+			xoaMangTaiViTri(x, n, i);
+	}
+}
+void ThemPhanTuDauMang(int x[100], int &n){
+	int m;
+	printf("\nNhap phan tu can them: ");scanf("%d",&m);
+	int size = sizeof(x)/sizeof(x[0]);
+	if (n==size){
+		printf("Khong the them vao mang!");
+	}
+	n++;
+	for(int i=n-1;i>0;i--){
+		x[i]=x[i-1];
+	}
+	x[0]=m;
+}
+void ThemPhanTuCuoiMang(int x[100], int &n){
+	int m;
+	printf("\nNhap phan tu can them: ");scanf("%d",&m);
+	int size = sizeof(x)/sizeof(x[0]);
+	if (n==size){
+		printf("Khong the them vao mang!");
+	}
+	x[n]=m;
+	n++;
+}
+void ThemPhanTuTheoYeuCau(int x[100], int &n){
+int k,m;
+printf("\nNhap vi tri trong mang can them: ");
+scanf("%d",&k);
+printf("\nNhap so can them: ");
+scanf("%d",&m);
+int size = sizeof(x)/sizeof(x[0]);
+	if (n==size){
+		printf("Khong the them vao mang!");
+	}
+n++;
+for(int i=n-1; i>k;i--){
+	x[i]=x[i-1];
+}
+x[k]=m;
+}
+int main(){
+	int mid=20,y1=5,y2=35,t1=-1,t2=1;
+	int y3=12,y4=28;
+	////
+	for(int i=1;i<=y1;i++)cout<<" ";cout<<"v";
+	for(int i=y1+1;i<=y3-2;i++)cout<<"v";
+	for(int i=y3+2;i<=y4+2;i++)cout<<" ";cout<<"v";
+	for(int i=y4;i<=y2-3;i++)cout<<"v";cout<<endl;
+	////
+	while(1){
+		for(int i=1;i<=y1-1;i++)cout<<" ";cout<<"v";
+		if(y3>y4){
+			for(int i=y1+1;i<=y2-1;i++)cout<<" ";cout<<"v";	
+		}else{
+			if(y1<y3){
+				for(int i=y1+1;i<=y3-1;i++)cout<<" ";cout<<"v";
+			}
+			if(y3<y4){
+				for(int i=y3+1;i<=y4-1;i++)cout<<" ";cout<<"v";
+			}			
+			if(y4<y2){
+				for(int i=y4+1;i<=y2-1;i++)cout<<" ";cout<<"v";
+			}
+			y3+=1;y4-=1;
+		}	
+		cout<<endl;
+		y1+=t1;y2+=t2;
+		if(y1==0){
+			t1=1;t2=-1;
+			y1+=t1;y2+=t2;
+		}
+		if(y1==y2) {
+			for(int i=1;i<=y1-1;i++)cout<<" ";cout<<"v";
+			break;	
+		}
+	}
+	int luachon;
+	printf("\n---Menu---\n");
+    printf("1-tim so lon nhat\n");
+    printf("2-tim so nho nhat\n");
+    printf("3-Sap xep mang tang dan\n");
+    printf("4-Sap xep mang giam dan\n");
+    printf("5-Dao nguoc mang\n");
+    printf("6-Tim kiem phan tu trong mang\n");
+    printf("7-Tim phan tu nho thu hai trong mang\n");
+    printf("8-Xoa phan tu\n");
+    printf("9-Chen phan tu vao vi tri dau\n");
+    printf("10-Chen phan tu vao vi tri cuoi\n");
+    printf("11-Chen phan tu vao vi tri theo yeu cau\n");
+	printf("\nNhap lua chon cua ban: ");
+    scanf("%d", &luachon);
+    if(11>=luachon<=0){
+    	printf("\nVui long chon dung lua chon trong menu!");
+	}
+    switch (luachon){
+    	case 1:
+    		 nhapmang(a,n);
+             xuatmang(a,n);
+    		printf("\nSo lon nhat trong mang la: %d", timmax(a,n));
+    		break;
+    	case 2:
+    		nhapmang(a,n);
+             xuatmang(a,n);
+    		printf("\nSo nho nhat trong mang la: %d", timmin(a,n));
+    		break;
+    	case 3:
+    		nhapmang(a,n);
+             xuatmang(a,n);
+             printf("\nMang tang dan: ");
+             sapxepTang(a,n);
+             xuatmang(a,n);
+             break;
+		case 4:
+			nhapmang(a,n);
+             xuatmang(a,n);
+             printf("\nMang giam dan: ");
+             sapxepGiam(a,n);
+             xuatmang(a,n);
+             break;
+        case 5:
+        	nhapmang(a,n);
+             xuatmang(a,n);
+             printf("\nMang dao nguoc: ");
+             DaoNguocMang(a,n);
+             xuatmang(a,n);
+             break;
+        case 6:
+			nhapmang(a,n);
+             xuatmang(a,n);
+             ThucHienTimKiem(a,n);
+			 break;
+		case 7:
+			nhapmang(a,n);
+             xuatmang(a,n);
+             printf("\nPhan tu nho thu hai trong mang la: %d", PhanTuNhoThuHai(a,n));
+             break;
+	    case 8:
+		nhapmang(a,n);
+             xuatmang(a,n);
+             xoaMangTheoGiaTri(a,n);
+             xuatmang(a,n);
+             break;
+        case 9:
+        	nhapmang(a,n);
+             xuatmang(a,n);
+             ThemPhanTuDauMang(a,n);
+             printf("\nMang luc nay co gia tri la: ");
+             xuatmang(a,n);
+             break;
+        case 10:
+        	nhapmang(a,n);
+             xuatmang(a,n);
+             ThemPhanTuCuoiMang(a,n);
+             printf("\nMang luc nay co gia tri la: ");
+             xuatmang(a,n);
+             break;
+        case 11:
+            nhapmang(a,n);
+             xuatmang(a,n);
+             ThemPhanTuTheoYeuCau(a,n);
+             printf("\nMang luc nay co gia tri la: ");
+             xuatmang(a,n);
+             break;
+	}
+	getch();
+	return 0;
+}
+    
